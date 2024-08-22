@@ -1,12 +1,17 @@
-const a = {
-    "ost": [{
-        name: "키키",
-        song: "따스함에 둘러쌓인다면"
-    },
-    {
-        name: "하울",
-        song: 1000
-    }]
-};
+const express = require('express')
+const app = express()
+const port = 3001
+const fs = require('fs')
+app.get('/', (req, res) => {
+    const f = JSON.parse(fs.readFileSync('b.json', {
+        encoding: "utf-8"
+    }));
 
-console.log(a.ost)
+    const data = {
+        "name": f.name
+    };
+
+    res.send(data);
+});
+
+app.listen(port, () => console.log(`http://127.0.0.1:${port}`));
